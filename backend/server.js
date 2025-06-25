@@ -2,16 +2,17 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
-dotenv.config();
 import BirthCertificate from './model.js';
 
+dotenv.config();
+
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000; // ✅ Use dynamic PORT for Render
 
 app.use(express.json());
 app.use(cors());
 
-// ✅ Improved MongoDB Connection
+// ✅ MongoDB Connection
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
@@ -21,13 +22,14 @@ const connectDB = async () => {
     console.log('✅ MongoDB connected for Birth Certificate Data');
   } catch (error) {
     console.error('❌ DB connection error:', error);
-    process.exit(1); // Stop server if DB connection fails
+    process.exit(1);
   }
 };
 
 connectDB();
 
-// API to check for duplicates
+// ✅ API Routes
+
 app.post('/api/check-duplicate', async (req, res) => {
   const { motherName, fatherName, birthDate } = req.body;
   try {
@@ -42,7 +44,6 @@ app.post('/api/check-duplicate', async (req, res) => {
   }
 });
 
-// API to submit data
 app.post('/api/submit', async (req, res) => {
   try {
     const newRecord = new BirthCertificate(req.body);
@@ -54,7 +55,6 @@ app.post('/api/submit', async (req, res) => {
   }
 });
 
-// API to search Birth Certificates
 app.get('/api/search', async (req, res) => {
   const { type, query } = req.query;
 
@@ -65,16 +65,21 @@ app.get('/api/search', async (req, res) => {
   try {
     let filter = {};
 
-    if (type === 'motherName') {
-      filter = { motherName: { $regex: query, $options: 'i' } };
-    } else if (type === 'motherAadhar') {
-      filter = { motherAadhar: query };
-    } else if (type === 'birthDate') {
-      filter = { birthDate: query };
-    } else if (type === 'city') {
-      filter = { city: { $regex: query, $options: 'i' } };
-    } else {
-      return res.status(400).json({ message: 'Invalid search type' });
+    switch (type) {
+      case 'motherName':
+        filter = { motherName: { $regex: query, $options: 'i' } };
+        break;
+      case 'motherAadhar':
+        filter = { motherAadhar: query };
+        break;
+      case 'birthDate':
+        filter = { birthDate: query };
+        break;
+      case 'city':
+        filter = { city: { $regex: query, $options: 'i' } };
+        break;
+      default:
+        return res.status(400).json({ message: 'Invalid search type' });
     }
 
     const results = await BirthCertificate.find(filter);
@@ -88,4 +93,10 @@ app.get('/api/search', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+// ✅ Root Test Route
+app.get('/', (req, res) => {
+  res.send('🌐 Backend is up and running!');
+});
+
+// ✅ Start Server
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
