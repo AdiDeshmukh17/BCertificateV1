@@ -7,7 +7,7 @@ import BirthCertificate from './model.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000; // ✅ Use dynamic PORT for Render
+const PORT = process.env.PORT; // ✅ Use dynamic PORT for Render
 
 app.use(express.json());
 app.use(cors());

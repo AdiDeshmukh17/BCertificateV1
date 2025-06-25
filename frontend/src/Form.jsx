@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 const BirthCertificate = () => {
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -48,7 +50,7 @@ const BirthCertificate = () => {
 
   const checkDuplicate = async (data) => {
     try {
-      const response = await fetch('http://localhost:5000/api/check-duplicate', {
+      const response = await fetch(`${API_URL}/api/check-duplicate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -80,7 +82,7 @@ const BirthCertificate = () => {
     if (!isDuplicate) return;
 
     try {
-      const response = await fetch('http://localhost:5000/api/submit', {
+      const response = await fetch(`${API_URL}/api/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
