@@ -6,6 +6,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Navigate, UNSAFE_NavigationContext, useNavigate } from 'react-router-dom';
 
 function CertificateReturn() {
+    const API_BASE = import.meta.env.VITE_API_URL;
+
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
     const [searchType, setSearchType] = useState('motherAadhar');
@@ -35,7 +37,7 @@ function CertificateReturn() {
         setHasSearched(true);
 
         try {
-            const response = await fetch(`http://localhost:5000/api/search?type=${searchType}&query=${encodeURIComponent(query)}`);
+            const response = await fetch(`${API_BASE}/api/search?type=${searchType}&query=${encodeURIComponent(query)}`);
             if (!response.ok) {
                 throw new Error('Error fetching records');
             }
