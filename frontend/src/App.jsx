@@ -14,6 +14,7 @@ function Home() {
         <button onClick={() => navigate('/register')} className="px-4 py-2 bg-blue-700 text-white rounded-lg shadow-md hover:bg-blue-800">Go to Register Form</button>
         <button onClick={() => navigate('/certificate')} className="px-4 py-2 bg-green-700 text-white rounded-lg shadow-md hover:bg-green-800">Go to Certificate Return</button>
       </div>
+        <h2 className="text-3xl font-bold mb-6">"This isn't the final implementation—it's a prototype version I created based on the client's requirements."</h2>
     </div>
   );
 }
