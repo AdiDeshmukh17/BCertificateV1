@@ -1,7 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-
 import BirthCertificate from './Form';
 import CertificateReturn from './CertificateUi';
 
@@ -27,11 +24,9 @@ function Home() {
         </button>
       </div>
 
-      {/* 🔽 Swiper Slider */}
-      <div>
-        <h2 className="text-xl font-semibold text-center">This isn't the final implementation</h2>
-        <h2 className="text-xl font-semibold text-center">It's a prototype version</h2>
-        <h2 className="text-xl font-semibold text-center">Developed based on client requirements</h2>
+      {/* Disclaimer Message */}
+      <div className="bg-white bg-opacity-20 text-sm italic text-center text-white border border-white border-opacity-30 rounded-md px-4 py-2 mt-4 max-w-xl">
+        This isn't the final implementation — it's a prototype version developed based on the client's requirements.
       </div>
     </div>
   );
