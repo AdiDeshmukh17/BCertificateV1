@@ -28,23 +28,10 @@ function Home() {
       </div>
 
       {/* 🔽 Swiper Slider */}
-      <div className="w-full max-w-xl">
-        <Swiper
-          spaceBetween={20}
-          slidesPerView={1}
-          autoplay={{ delay: 3000 }}
-          loop
-        >
-          <SwiperSlide>
-            <h2 className="text-xl font-semibold text-center">This isn't the final implementation</h2>
-          </SwiperSlide>
-          <SwiperSlide>
-            <h2 className="text-xl font-semibold text-center">It's a prototype version</h2>
-          </SwiperSlide>
-          <SwiperSlide>
-            <h2 className="text-xl font-semibold text-center">Developed based on client requirements</h2>
-          </SwiperSlide>
-        </Swiper>
+      <div>
+        <h2 className="text-xl font-semibold text-center">This isn't the final implementation</h2>
+        <h2 className="text-xl font-semibold text-center">It's a prototype version</h2>
+        <h2 className="text-xl font-semibold text-center">Developed based on client requirements</h2>
       </div>
     </div>
   );
